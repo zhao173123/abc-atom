@@ -1,0 +1,22 @@
+1.观众申请APPLY，主持人ACCEPT
+livelink.hasLinked = false -> true
+2.主持人邀请，调用/v1/users/search/guest/invite
+
+
+
+1.GUEST_REQUEST 观众发起连线请求
+  livelink : insert/update 
+  useractiontracking : insert
+2.GUEST_REQUEST_CANCEL 观众取消连线请求
+3.GUEST_CANCEL 观众结束连线
+4.HOST_REJECT 主播拒绝连线（未使用）
+5.HOST_CANCEL 主播取消嘉宾连线
+6.HOST_ACCEPT 主播接受观众连线
+7.HOST_REPLACE 主播切换嘉宾视窗
+8.HOST_MUTE 主播静音
+9.MUTE_SELF 静音自己
+10.UPDATE_LAYOUT 布局调整（上镜，结束连线，布局调整等都会触发）
+   更新liveshow.layout
+11.HOST_INVITE_GUEST 主播邀请连线
+12.GUEST_ACCEPT_INVITATION 接受连线邀请
+13.GUEST_ON_CAMERA 观众立即上镜成为嘉宾

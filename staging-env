@@ -1,0 +1,22 @@
+https://console.tim.qq.com/v4/group_open_http_svc/create_group?contenttype=json&identifier=admin&random=1481868880262&sdkappid=1400012392&usersig=eJxFkNFOgzAUQP*F1xltC92KyR4aQLcgRDMwy15IQ8tycdDKKkyN-y4SFl-Pyc0993472dPuVhgDshC2cDvp3DvIuZmwuhjoVCEqq7oRY0opQehqe9WdQbejIAhTTFyE-iVI1VqoYBoUsoF2Fmc4jiSJXoItF5F59nVvhy3*SsN62euHIQv9pj5VXe*mm-wV3i-1cBefOPBq8A4ZD1YRjr1FXIZJr4SOjl4Sp5sA57AgZP-YBpLmfL2*LpNvxXTbX7031o2VPpmlhUZNnGG2ZGzFZi7KUn*0trCfRk3P*PkFoMpXLA__
+{"Type":"AVChatRoom","Owner_Account":"7000476","Name":"ceshi...","GroupId":"585385ef77c86bad5e1e4d9c"}
+
+{"MsgRandom":634532,"To_Account":["7000523"],"From_Account":"7000476",
+"MsgBody":[{"MsgContent":{"Ext":"202&{\"imageURL\":\"http://staging.vliveshow.com/M00/00/00/rBAPdlhTizeAaAVoAABHYd5Dk7Q4049242\",\"anchorID\":7000476,\"roomID\":\"58538b37d34e8086d75694a5\"}","Desc":"您关注的就会红红火火正在直播, 快去参与直播吧！",
+"Data":"202&{\"imageURL\":\"http://staging.vliveshow.com/M00/00/00/rBAPdlhTizeAaAVoAABHYd5Dk7Q4049242\",\"title\":\"就会红红火火\",\"anchorID\":7000476,\"anchorName\":\"我就喜欢\",\"content\":\"您关注的就会红红火火正在直播, 快去参与直播吧！\",\"roomID\":\"58538b37d34e8086d75694a5\"}"},
+"MsgType":"TIMCustomElem"}]}
+ {"actionStatus":"FAIL","errorInfo":"invalid To_Account","errorCode":90012}
+
+
+110~112
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '{
+"query":{"match_all":{}}
+}
+
+curl '172.16.15.110:9200/vliveshow/_search?pretty' -d '{
+"query":{"match_all":{}}
+}'
+
+curl '172.16.15.111:9200/vliveshow/_search?pretty' -d '{
+"query":{"match_all":{}}
+}'

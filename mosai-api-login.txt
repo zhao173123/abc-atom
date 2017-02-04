@@ -1,0 +1,78 @@
+登陆：
+1.1 手机 v1/users/phone/exist:SecurityControlller
+1.1.1 手机号是否存在
+http://www.vliveshow.com/vliveshow-api-app/v1/users/phone/exist?mobilePhone=15800576974&nationCode=86
+return :
+{
+  "success": true,
+  "message": "",
+  "error_code": 0,
+  "results": {
+    "existPhone": true
+  }
+}
+1.1.2 密码登录 v1/users/phone/password_login:SecurityControll
+http://www.vliveshow.com/vliveshow-api-app//v1/users/phone/password_login?nationCode=86&mobilePhone=15800576974&password=888888&languge=CN
+return:
+
+{
+  "success": true,
+  "message": "",
+  "error_code": 0,
+  "results": {
+    "tencentSignature": {
+      "sig": "eJxFkF1PwjAUhv-Lro07bWnZTLhA-Nj8ABeG4NVSaJl10tW2Q4jxvzMW0Nvnycn7vucnyJ*ml9wYJQruC2JFcBVAcNFhuTPKyoKvvbQtRpRSDHC2W2mdqnUrMCCKMAH4l0pI7dVadYcMGI7*lFNly55vs1GavFWsnvfi8SxMwbBMunBJoMkWUTPOo1kFySKd2-Jxko*G6jrMzUv1ybnT9Ptj9yXefZzeb2-2GDdJ4ibL6QPVblOa17vhYHAOE1XRrTv277X9EGKInKRXG9nxPgFG4n584ny1qhvtC783snvH7wE7uVb9",
+      "expireTime": 15552000,
+      "initTime": 1473063979
+    },
+    "userInfo": {
+      "id": 6062800,
+      "username": "6062800",
+      "nickName": "Zhaochen",
+      "avatars": {
+        "groupName": "vipabc",
+        "fileName": "M00/00/A7/rBAOgFe7t9yATxhJAAAI_UdBKxo2565415"
+      },
+      "gender": "MALE",
+      "intro": null,
+      "password": "ac0ec70f42dac1663824be7a241e98faba8380a80978ed1cba18f79d6e3c870655c1e9dab5e25350e1dc6943e75d14d82cbb425bd22adf28711c4cbde9d4119c",
+      "passwordSalt": "53d8da72d49942810c7f149650cfa2b1",
+      "phoneEncrypt": "VMIVByitTRFTaHjvzTtqSA==",
+      "mobilePhone": "a33543def6731ca0977320dd8d1bc97d",
+      "nationCode": "86",
+      "thirdpartyAccount": null,
+      "thirdpartyPlatform": null,
+      "thirdpartyIconUrl": null,
+      "signupType": "PHONE",
+      "loginTime": null,
+      "createTime": 1471920069999,
+      "updateTime": 1471920069999,
+      "level": null,
+      "experience": null,
+      "area": null,
+      "showCover": null,
+      "role": 16,
+      "isBlocked": false,
+      "isHost": false,
+      "isSuperUser": false,
+      "isSpecialGuest": false,
+      "isGuest": false,
+      "isAudiences": true,
+      "administrator": false,
+      "decodeMobilePhone": "15800576974"
+    },
+    "token": "b548620998a8f6cdc30a7f345229a458"
+  }
+}
+1.2 验证码登录
+1.2.1 请求发送验证码api /v1/users/phone/send_verification_code:SecurityController
+http://www.vliveshow.com/vliveshow-api-app/v1/users/phone/send_verification_code?mobilePhone=15800576974&nationCode=86
+return:
+{
+  "success": true,
+  "message": "已发送",
+  "error_code": 0,
+  "results": {}
+}
+核心方法：boolean success = mobilePhoneVerificationService.sendSMS(nationCode,mobilePhone);   //qcloud->httpclient
+1.2.2验证码登录api /v1/users/phone/verifycode_login

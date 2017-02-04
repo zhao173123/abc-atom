@@ -1,0 +1,28 @@
+飞牛网礼品卷（导入数据库）
+t_diamond_campaign_response中存在的且之前未注册的用户，新注册的时候发送短信送礼品卷
+1.新注册用户，查看t_diamond_campaign_response中是否存在
+2.存在，从礼品表选出一个卡号并发送短信
+2.1 记录信息，id,gift_id,gift_activation_key,gift_status,user_id、create_time,update_time
+3.不存在，return
+4.结束时间 2016-12-15 23:59:59
+5.建表：
+DROP TABLE IF EXISTS "public"."t_thirdparty_gift_info";
+CREATE TABLE "public"."t_thirdparty_gift_info" (
+	"id" int8 NOT NULL DEFAULT nextval('t_thirdparty_gift_info_id_seq'::regclass),
+	"gift_id" varchar NOT NULL COLLATE "default",
+	"gift_activation_key" varchar NOT NULL COLLATE "default",
+	"gift_status" int4 DEFAULT 0,
+	"user_id" varchar COLLATE "default",
+	"create_time" timestamp(6) NULL DEFAULT now(),
+	"update_time" timestamp(6) NULL DEFAULT now()
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "public"."t_thirdparty_gift_info" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."t_thirdparty_gift_info"."gift_id" IS '礼品券的ID';
+COMMENT ON COLUMN "public"."t_thirdparty_gift_info"."gift_activation_key" IS '礼品券码';
+COMMENT ON COLUMN "public"."t_thirdparty_gift_info"."gift_status" IS '礼品状态0表示未使用，1表示已使用';
+COMMENT ON COLUMN "public"."t_thirdparty_gift_info"."user_id" IS '接收礼品券的用户id';
+COMMENT ON COLUMN "public"."t_thirdparty_gift_info"."update_time" IS '送券时间';
+
+ALTER TABLE "public"."t_thirdparty_gift_info" ADD PRIMARY KEY ("id") NOT DEFERRABLE INITIALLY IMMEDIATE;

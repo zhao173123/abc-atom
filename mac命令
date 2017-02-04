@@ -1,0 +1,16 @@
+1.查看文件大小
+ll -th Desktop/VIPabc赞助节目海选活动_xPqXgc5bNoUme3.txt
+2.重命名
+head VIPabc赞助节目海选活动_xPqXgc5bNoUme3.txt > 1111
+3.cat 1111
+4.查看数量
+wc -l VIPabc赞助节目海选活动_xPqXgc5bNoUme3.txt
+5.alias（把redis写进去）
+alias redis141="redis-cli -h 172.16.4.141 -p 6370";
+alias:
+alias ll='ls -alt'
+alias mongo141='mongo --host 172.16.4.141 --port 27015 vliveshow'
+alias redis141='redis-cli -h 172.16.4.141 -p 6370'
+6.登录postgressql
+psql -h 172.16.4.138 -U postgres -d vliveshow
+7.

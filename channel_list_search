@@ -1,0 +1,140 @@
+1.常态直播间
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":
+{
+  "bool" : {
+    "must" : [ {
+      "term" : {
+        "isTrialHost" : false
+      }
+    }, {
+      "term" : {
+        "living" : true
+      }
+    } ],
+    "must_not" : [ {
+      "exists" : {
+        "field" : "courseId"
+      }
+    }, {
+      "multi_match" : {
+        "query" : "妈妈来",
+        "fields" : [ "topics" ]
+      }
+    }, {
+      "multi_match" : {
+        "query" : "媽媽來",
+        "fields" : [ "topics" ]
+      }
+    }, {
+      "multi_match" : {
+        "query" : "总裁来",
+        "fields" : [ "topics" ]
+      }
+    }, {
+      "multi_match" : {
+        "query" : "總裁來",
+        "fields" : [ "topics" ]
+      }
+    } ]
+  }
+}
+}'
+2.妈妈来秀直播间
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":
+{
+  "bool" : {
+    "must" : [ {
+      "term" : {
+        "isTrialHost" : false
+      }
+    }, {
+      "term" : {
+        "living" : true
+      }
+    }, {
+      "or" : {
+        "filters" : [ {
+          "match" : {
+            "topics" : {
+              "query" : "妈妈来秀",
+              "type" : "phrase_prefix"
+            }
+          }
+        }, {
+          "match" : {
+            "topics" : {
+              "query" : "媽媽來秀",
+              "type" : "phrase_prefix"
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+}
+}'
+
+3.总裁来秀直播间
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":
+{
+  "bool" : {
+    "must" : [ {
+      "term" : {
+        "isTrialHost" : false
+      }
+    }, {
+      "term" : {
+        "living" : true
+      }
+    }, {
+      "or" : {
+        "filters" : [ {
+          "match" : {
+            "topics" : {
+              "query" : "总裁来秀",
+              "type" : "phrase_prefix"
+            }
+          }
+        }, {
+          "match" : {
+            "topics" : {
+              "query" : "總裁來秀",
+              "type" : "phrase_prefix"
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+}
+}'
+
+4.课程直播间
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":
+{
+  "bool" : {
+    "must" : [ {
+      "term" : {
+        "isTrialHost" : false
+      }
+    }, {
+      "term" : {
+        "living" : true
+      }
+    } ],
+    "filter" : {
+      "exists" : {
+        "field" : "courseId"
+      }
+    }
+  }
+}
+}'

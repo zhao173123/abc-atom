@@ -1,0 +1,147 @@
+
+
+
+
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":
+  {
+    "bool":{
+        "should":[
+          {"match":{"_id":"584a6069e4b0b5f55e577916"}}
+        ]
+    }
+  }
+}'
+//查询单条
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+  "query":{"match":{"_id":"5885a62ee4b0e1aa8fb5dd35"}}
+}'
+//修改
+curl -XPOST '172.16.4.141:9200/vliveshow/_update?pretty' -d '
+{
+  "script":{
+      "inline":"living=true",
+      "params":{
+        "ctx._source._id":"58085ad7e4b06e7b108eca76"
+      }
+  }
+}'
+//查询所有
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d'
+{
+  "query":{"match_all":{}}
+}'
+//查询过课程的直播间
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d'
+{
+  "query":{"match":{"lessonId":{$exists:true}}}
+}'
+//bool查询
+curl -XPOST '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+"bool":{"must":{"term":{"_id":"57c946a8e4b085f40dd66a2b"}}}}
+}'
+
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+"bool":{"must":{"term":{"_id":"57c946a8e4b085f40dd66a2b"}}}}
+}'
+
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '{
+  "query":""
+
+}'
+
+
+
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+  "bool" : {
+  "must" : [ {
+    "term" : {
+      "isTrialHost" : false
+    }
+  }, {
+    "term" : {
+      "living" : true
+    }
+  } ],
+  "filter" : {
+    "exists" : {
+      "field" : "courseId"
+    }
+  }
+}}
+}'
+
+///////////////ok///////
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+  "bool" : {
+  "must" : {
+    "term" : {
+      "_id" : "582c50a3e4b0d2ce8f15d03d"
+    }
+  }
+}
+}
+}'
+/////////////////
+
+//582c50a3e4b0d2ce8f15d03d
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+  "bool":{
+    "must":{
+      "term":{"_id":"582c50a3e4b0d2ce8f15d03d"}
+    }
+  }
+}
+}'
+////////
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"query":{
+  "bool" : {
+  "must" : [ {
+    "term" : {
+      "isTrialHost" : false
+    }
+  }, {
+    "term" : {
+      "living" : true
+    }
+  } ]
+}}
+}'
+
+
+createTime
+-XDELETE
+curl '172.16.4.141:9200/vliveshow/_search?pretty' -d '
+{
+"aggs":{
+  "range":{
+    "date_range":{
+      "field":"createTime",
+       "format":"MM-yyy",
+       2016-11-16T12:27:15.824000
+       "ranges":[
+                    {"to":"now-10M/M"},
+                    {"from":"now-10M/M"}
+                ]
+    }
+  }
+}
+}'
+
+
+vliveshow
+curl -XPUT '172.16.4.141:9200/vliveshow/liveshow?pretty' -d '

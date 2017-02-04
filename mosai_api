@@ -1,0 +1,36 @@
+     public static readonly string password_login = "/v1/users/phone/password_login";
+     public static readonly string login = "/v1/users/thirdparty/login";
+     public static readonly string send_verification_code = "/v1/users/phone/send_verification_code";
+     public static readonly string verifycode_login = "/v1/users/phone/verifycode_login";
+     public static readonly string init_pwd = "/v1/users/phone/init_pwd";
+     public static readonly string exist = "/v1/users/phone/exist";
+     public static readonly string skills = "/v1/user/skills"; //2
+     public static readonly string config = "/v1/liveshow/config"; //3
+     public static readonly string create = "/v1/liveshow/create"; //4
+     public static readonly string destroy = "/v1/liveshow/{0}/destroy";
+     public static readonly string heart_beat = "/v1/liveshow/heart_beat";
+     public static readonly string end_page_info = "/v1/liveshow/end_page_info";
+     public static readonly string collection = "/v1/users/device_info/collection";
+     public static readonly string tracking = "/v1/users/action/tracking";
+     public static readonly string interact = "/v1/liveshow/interact";
+     public static readonly string logout = "/v1/users/logout";
+     public static readonly string current_audiences = "/v1/liveshow/current_audiences";
+     public static readonly string get_new_channelkey = "/v1/key/record/create";
+
+     public static readonly string stars = "/v1/users/stars/list";//我的关注
+     public static readonly string follow = "/v1/users/follow";//关注
+     public static readonly string unfollow = "/v1/users/unfollow";//取消关注
+     public static readonly string fans = "/v1/users/fans/list";//粉丝列表
+     public static readonly string blacklist_create = "/v1/users/blacklist/create";//拉黑
+     public static readonly string blacklist_cancel = "/v1/users/blacklist/cancel";//取消拉黑
+     public static readonly string get_base_info = "/v1/users/get_base_info";//获取指定ID的用户基本信息
+
+     public static readonly string ranking = "/v1/money/ranking";//V票排行榜
+     public static readonly string profile_base = "/v1/users/profile/base";//修改/获取用户信息
+     public static readonly string balance = "/v1/money/user/balance";//我的V票
+
+     public static readonly string invite = "/v1/users/search/guest/invite";//邀请嘉宾搜索
+     public static readonly string link_request_list = "/v1/liveshow/host/link_request_list";//申请连线观众列表
+     public static readonly string related = "/v1/users/related/list";//主播相关的人
+
+     public static readonly string send = "/v1/users/report/send";//举报

@@ -1,11 +1,10 @@
-1.观众申请APPLY，主持人ACCEPT
+1.1 观众申请APPLY，主持人ACCEPT
 livelink.hasLinked = false -> true
-2.主持人邀请，调用/v1/users/search/guest/invite
-
+1.2 主持人邀请，调用/v1/users/search/guest/invite
 
 
 1.GUEST_REQUEST 观众发起连线请求
-  livelink : insert/update 
+  livelink : insert/update
   useractiontracking : insert
 2.GUEST_REQUEST_CANCEL 观众取消连线请求
 3.GUEST_CANCEL 观众结束连线

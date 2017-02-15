@@ -72,3 +72,36 @@ db.getCollection('roomgift').aggregate([
 
 //活跃用户数据
 db.getCollection('useractiontracking').find({Action:'ClickRefresh',createTime:{$gte:ISODate("2017-01-24T00:00:00Z"),$lt:ISODate("2017-01-25T00:00:00Z")}}).count()
+
+
+//piple管道查询，某个直播间送礼记录
+db.getCollection('roomgift').aggregate([
+  { "$match" : { "roomId" : "5885a0d277c8fb495ab9661f"}} ,
+  { "$group" : { "_id" : { "fromUser" : "$fromUser" , "roomId" : "$roomId"} ,
+  //"receiveUserId" : { "$push" : "$toUser"} ,
+  //"giftGivingUserId" : { "$push" : "$fromUser"} ,
+  "diamond" : { "$sum" : "$diamond"} , "vTicket" : { "$sum" : "$earning"} ,
+  "experience" : { "$sum" : "$experience"}}} ,
+  { "$project" : { "roomId" : "$_id.roomId" , "receiveUserId" : 1 , "giftGivingUserId" : 1 , "diamond" : 1 , "vTicket" : 1 , "experience" : 1}} ,
+  { "$sort" : { "diamond" : -1}}
+ 
+查询结果：
+{ "_id" : { "fromUser" : NumberLong(7000520), "roomId" : "5885a0d277c8fb495ab9661f" }, "diamond" : 10000, "vTicket" : 70000, "experience" : 0, "roomId" : "5885a0d277c8fb495ab9661f" }
+{ "_id" : { "fromUser" : NumberLong(7000520), "roomId" : "5885a0d277c8fb495ab9661f" }, "receiveUserId" : [ NumberLong(7000476), NumberLong(7000476), NumberLong(7000476) ], "giftGivingUserId" : [ NumberLong(7000520), NumberLong(7000520), NumberLong(7000520) ], "diamond" : 10000, "vTicket" : 70000, "experience" : 0, "roomId" : "5885a0d277c8fb495ab9661f" }
+
+
+//某个主播在某段时间得票
+db.getCollection('roomgift').aggregate([
+    {$match:{
+        "toUser":{$in:[NumberLong(6100166)]},
+        "status":{$ne:["SETTLE_FAIL"]},
+        "createTime":{$lte:ISODate("2017-02-08T12:00:00.000Z")}
+}},
+    {$group:{"_id":"$toUser",total:{$sum:"$earning"}}},
+    {$limit:500}
+]);
+
+//update,更新字段
+db.courseColumn.update({"_id":ObjectId("58a14c74d4c695d447d2e08a")},{$set:{name4en:"test en"}});
+//去重
+db.getCollection('roomgift').distinct("toUser",{"toUser":NumberLong(7000476)});

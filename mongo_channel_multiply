@@ -50,3 +50,11 @@ data.activeNum=24000;
 db.basesysconfig.update({"type":"ROBOTCONFIG"},{$set:{
 "data":JSON.stringify(data)
 }});
+
+
+var liveConfig=db.basesysconfig.findOne({"type":"ROBOTCONFIG"});
+var data=JSON.parse(liveConfig.data);
+data.reuse=true;
+db.basesysconfig.update({"type":"ROBOTCONFIG"},{$set:{
+"data":JSON.stringify(data)
+}});

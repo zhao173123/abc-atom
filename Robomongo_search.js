@@ -105,3 +105,6 @@ db.getCollection('roomgift').aggregate([
 db.courseColumn.update({"_id":ObjectId("58a14c74d4c695d447d2e08a")},{$set:{name4en:"test en"}});
 //去重
 db.getCollection('roomgift').distinct("toUser",{"toUser":NumberLong(7000476)});
+//查询某个时段内的直播信息
+db.getCollection('liveshow').find({"host":"6084599",
+    "createTime":{$gte:ISODate("2017-02-14 16:00:00")}},{"createTime":1,"updateTime":1})

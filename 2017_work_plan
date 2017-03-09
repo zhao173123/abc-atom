@@ -235,3 +235,17 @@ channelId:8,channelType:Music,channelNameCN:音乐,type:normal
 channelId:9,channelType:OuterSports,channelNameCN:户外体育,type:normal
 channelId:10,channelType:Health,channelNameCN:健康养生,type:normal
 channelId:11,channelType:More,channelNameCN:更多精彩,type:normal
+****************************************************************************************************
+3-7～～～～～～～～
+1.支付功能；
+2.Mybatis分页优化，重写mybatis的逻辑分页功能，加入物理分页；
+  2.1 https://github.com/miemiedev/mybatis-paginator
+  2.2 http://duanhengbin.iteye.com/blog/1998017
+  2.3 http://www.cnblogs.com/jcli/archive/2011/08/09/2132222.html
+
+  分2步走，1-先通过limit，offset实现分页查询，另一个count方法实现统计功能
+          2-通过Interceptor实现动态分页，实现mybatis的物理分页功能
+了解Mybatis的分页实现，在此基础上实现更高效的分页算法
+3.Concurrency
+4.mybatis源码-深入浅出系列
+http://www.cnblogs.com/dongying/p/4040435.html

@@ -379,9 +379,10 @@ userId&giftId&「nickName」送了一个神秘礼物xxx&num&timestamp
         当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，
         但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，
         或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。
-10.spring事务
-11.支付宝、微信、apple pay充值系统
-12.ThreadLocal/HashMap/ConcurrentHashMap/ArrayList/Atomic,线程模型，lock／unlock，synchronized原理,volatile线程通讯
+10.Spring事务
+11.支付宝、微信、Apple pay充值系统
+12.ThreadLocal/HashMap/ConcurrentHashMap/ArrayList/Atomic,
+    线程模型，lock／unlock，synchronized原理,volatile线程通讯
 13.IO/NIO，Netty
 14.JVM
 15.HTTP协议／TCP协议／UDP协议，状态码

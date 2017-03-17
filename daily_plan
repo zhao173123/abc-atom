@@ -315,8 +315,75 @@ userId&giftId&「nickName」送了一个神秘礼物xxx&num&timestamp
 5.设计模式（策略、装饰、适配、享元、工厂、代理、门面、建造者、观察者）
 6.hibernate|mybatis
 7.集合、IO、NIO、JVM、线程、通信协议、SpringMVC框架原理
-8.线程池
-9.悲观锁、乐观锁
+8.线程池，Concurrent
+  ***********************************************************************************************
+  Java的CAS会使用现代处理器上提供的高效机器级别原子指令，这些原子指令以原子方式对内存执行读-改-写操作，
+  这是在多处理器中实现同步的关键（从本质上来说，能够支持原子性读-改-写指令的计算机器，是顺序计算图灵机的异步等价机器，
+  因此任何现代的多处理器都会去支持某种能对内存执行原子性读-改-写操作的原子指令）
+  同时，volatile变量的读/写和CAS可以实现线程之间的通信。
+  把这些特性整合在一起，就形成了整个concurrent包得以实现的基石。
+
+  Java线程之间的通信4种方式：
+  1.A线程写volatile变量，随后B线程读这个volatile变量
+  2.A线程写volatile变量，随后B线程用CAS更新这个volatile变量
+  3.A线程用CAS更新一个volatile变量，随后B线程用CAS更新这个volatile变量
+  4.A线程用CAS更新一个volatile变量，随后B线程读这个volatile变量
+
+  Concurrent源码实现，一个通用的方式：
+  1.首先，声明共享变量为volatile
+  2.然后，使用CAS的原子条件更新来实现线程之间的同步
+  3.同时，配合以volatile的读／写和CAS所具有的volatile读和写内存语义来实现线程间的通讯
+
+9.悲观锁、乐观锁  -- synchronized，lock／unlock，volatile
+  9.1悲观锁：一段执行逻辑加上悲观锁，不同线程同时执行时，只能有一个线程执行，其他的线程在入口处等待，直到锁释放
+  9.2乐观锁：一段执行逻辑加上乐观锁,不同线程同时执行时,可以同时进入执行,在最后更新数据的时候要检查这些数据是否被其他线程修改了(版本和执行初是否相同),没有修改则进行更新,否则放弃本次操作.
+  9.3cas:Compare and Swap,比较交换
+    cas有3个操作数：内存值V，旧的预期值A，要修改的新值B；当且仅当A等于V时，将内存值修改为B，否则什么都不做
+    探究AtomicInteger如何在没有锁的情况下保证数据正确性：
+    private volatile int value;
+    public final int get(){
+      return value;
+    }
+    ++i的实现：
+    public final int intcrementAndGet(){
+        for(;;){
+          int current = get();
+          int next = current + 1;
+          if(compareAndSet(current, next)){
+              return next;
+          }
+        }
+    }
+    这里采用了CAS操作，每次从内存中读取数据，然后将此数据和+1后的值进行比较，如果成功则返回结果；否则重试直到成功。
+    而public final boolean compareAndSet(int expect, int update){
+        return unsafe.compareAndSwapInt(this, valueOffset, expect, update);
+    }
+    利用JNI来完成CPU指令的操作。
+
+    CAS缺点：ABA问题&循环时间长开销大
+    1.ABA问题 http://blog.hesey.net/2011/09/resolve-aba-by-atomicstampedreference.html
+        如果原来一个值是A，变成B，又变成A，那么CAS在进行检查的时候会发现它的值没有变化，但是实际上却变化了。
+        ABA的问题解决思路就是使用版本号，在变量前追加版本号，每次变量更新时把版本+1，那么A-B-A就变成了1A-2B-3A
+
+        JDK1.5开始，提供了java.util.concurrent.atomic.AtomicStampedReference来解决ABA问题。
+        AtomicStampedReference.compareAndSet首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，
+        则以原子方式将该引用和该标志的值设置为给定的更新值。
+    2.循环时间长开销大
+        自旋CAS如果长时间不成功，会给CPU带来非常大的执行开销。如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，
+        pause指令有两个作用，
+        第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，
+        延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。
+        第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）
+        而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。
+    3.只能保证一个共享变量的原子操作
+        当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，
+        但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，
+        或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。
 10.spring事务
 11.支付宝、微信、apple pay充值系统
+12.ThreadLocal/HashMap/ConcurrentHashMap/ArrayList/Atomic,线程模型，lock／unlock，synchronized原理,volatile线程通讯
+13.IO/NIO，Netty
+14.JVM
+15.HTTP协议／TCP协议／UDP协议，状态码
+16.unSafe
 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟

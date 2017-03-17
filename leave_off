@@ -1,0 +1,40 @@
+1.Alfred3
+2.homebrew
+  Caskroom
+    Alfred3
+    Atom
+    beyond-compare
+    firefox
+    google-chrome
+    sourcetree
+    Textmate
+    vmware-function
+  Cellar
+    apache-tomcat
+    docker
+    elasticsearch
+    maven
+    mongodb
+    nexus
+    openssl
+    postgresql
+    redis
+    springboot
+    wget
+    mysql
+3.Atom
+4.Evernote
+5.xcode
+6.Textmate
+7.vmware function
+8.visual VM
+9.navicat premium
+10.git
+11.go
+12.homebrew
+13.jmeter
+14.eclipse:jee-neon,sts
+15.robomongo:robomongo-0.9.0-darwin-x86_64-0786489.dmg
+16.jekins
+17.charles
+18.postman
